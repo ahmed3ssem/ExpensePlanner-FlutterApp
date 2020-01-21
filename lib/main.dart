@@ -23,7 +23,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Flutter App'),
+          title: Text('Expense Planner'),
+          centerTitle: true,
         ),
         body: Column(
           children: <Widget>[
@@ -35,9 +36,23 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
             ),
-            Card(
-              child: Text("List Of TX"),
-            )
+           Column(
+             children: transaction.map((tx){
+               return Card(
+                 child: Row(
+                   children: <Widget>[
+                     Container(child: Text(tx.amount.toString()),),
+                     Column(
+                       children: <Widget>[
+                         Text(tx.tittle),
+                         Text(tx.date.toString())
+                       ],
+                     )
+                   ],
+                 ),
+               );
+             }).toList()
+             ),
           ],
         ));
   }
