@@ -37,7 +37,22 @@ class NewTransactionState extends State<NewTransaction> {
           children: <Widget>[
             TextField(decoration: InputDecoration(labelText: "Title"),controller: titleController,onSubmitted:(_)=>submitData() ,),
             TextField(decoration: InputDecoration(labelText: "Amount"),keyboardType: TextInputType.number,controller: amountController,onSubmitted:(_)=>submitData()),
-            FlatButton(child: Text('Save'),textColor: Colors.purple,onPressed:submitData,)
+            Container(
+              height: 70,
+              child:Row(
+                children: <Widget>[
+                  Text('No Date Choosen'),
+                  FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      onPressed: (){},
+                      child: Text('Choose Date',style: TextStyle(fontWeight: FontWeight.bold),)
+                  ),
+                ],
+              ),
+            ),
+            RaisedButton(
+              color: Theme.of(context).primaryColor,
+              child: Text('Save'),textColor: Colors.white,onPressed:submitData,)
           ],
         ),
       ),
