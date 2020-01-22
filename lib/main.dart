@@ -65,6 +65,12 @@ class MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void deleteTransaction(String id)
+  {
+    setState(() {
+      userTransaction.removeWhere((tx) => tx.id == id);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +86,7 @@ class MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Chart(recentTransaction),
-            TransactionList(userTransaction)
+            TransactionList(userTransaction,deleteTransaction)
           ],),
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
