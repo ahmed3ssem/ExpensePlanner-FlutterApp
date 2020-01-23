@@ -82,11 +82,11 @@ class MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4,
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
               child:Chart(recentTransaction),
             ),
             Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.6,
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
               child:TransactionList(userTransaction,deleteTransaction) ,
             ),
           ],),
