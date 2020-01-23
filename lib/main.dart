@@ -3,9 +3,13 @@ import 'package:expense_planner/widget/chart.dart';
 import 'package:expense_planner/widget/new_transaction.dart';
 import 'package:expense_planner/widget/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
