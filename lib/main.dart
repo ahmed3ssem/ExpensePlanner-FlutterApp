@@ -78,34 +78,46 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandScape = MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Expense Planner'),
       centerTitle: true,
+    );
+    final txWidget = Container(
+      height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+      child:TransactionList(userTransaction,deleteTransaction) ,
     );
     return Scaffold(
         appBar: appBar,
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Row(
+            if(isLandScape)
+              Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Show Chart"),
                 Switch(
                     value: showChart,
                     onChanged: (val){
-                      showChart = val;
+                      setState(() {
+                        showChart = val;
+                      });
                     }
                 ),
               ],
             ),
+            if(!isLandScape)
+            Container(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
+              child:Chart(recentTransaction),
+            ),
+            if(!isLandScape) txWidget,
+            if(isLandScape)
             showChart ? Container(
               height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
               child:Chart(recentTransaction),
             )
-            : Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
-              child:TransactionList(userTransaction,deleteTransaction) ,
-            ),
+            :txWidget
           ],),
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
