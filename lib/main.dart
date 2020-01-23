@@ -73,20 +73,22 @@ class MyHomePageState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Expense Planner'),
+      centerTitle: true,
+    );
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Expense Planner'),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.add),
-                onPressed: (){})
-          ],
-        ),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Chart(recentTransaction),
-            TransactionList(userTransaction,deleteTransaction)
+            Container(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4,
+              child:Chart(recentTransaction),
+            ),
+            Container(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.6,
+              child:TransactionList(userTransaction,deleteTransaction) ,
+            ),
           ],),
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
