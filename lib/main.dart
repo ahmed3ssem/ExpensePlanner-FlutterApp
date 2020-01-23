@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 void main(){
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitUp]);
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
@@ -33,9 +33,9 @@ class MyHomePage extends StatefulWidget{
 
 class MyHomePageState extends State<MyHomePage> {
 
+  bool showChart = false;
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-
   final List<Transaction> userTransaction = [
     /*Transaction(id: "t1", tittle: "New Mounth", amount: 300.0, date: DateTime.now()),
     Transaction(id: "t2", tittle: "Shoes", amount: 600.0, date: DateTime.now()),*/
@@ -75,6 +75,7 @@ class MyHomePageState extends State<MyHomePage> {
       userTransaction.removeWhere((tx) => tx.id == id);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
@@ -85,11 +86,23 @@ class MyHomePageState extends State<MyHomePage> {
         appBar: appBar,
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
-              child:Chart(recentTransaction),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Show Chart"),
+                Switch(
+                    value: showChart,
+                    onChanged: (val){
+                      showChart = val;
+                    }
+                ),
+              ],
             ),
-            Container(
+            showChart ? Container(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+              child:Chart(recentTransaction),
+            )
+            : Container(
               height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
               child:TransactionList(userTransaction,deleteTransaction) ,
             ),
